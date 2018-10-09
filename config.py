@@ -3,8 +3,14 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
+
+    conString = "DRIVER={SQL Server};Database=TestDB;SERVER=localhost\SQLEXPRESS;UID=sa;PWD=Tizen.sdk20"
+    conString = urllib.parse.quote_plus(conString)
+    conString = "mssql+pyodbc:///?odbc_connect=%s" %conString
+
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or conString
+    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+        # 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     MAIL_SERVER = os.environ.get('MAIL_SERVER')

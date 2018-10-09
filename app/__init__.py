@@ -22,6 +22,7 @@ moment = Moment(app)
 
 from app import routes, models, errors
 
+
 if not app.debug:
     if not os.path.exists('logs'):
         os.mkdir('logs')
